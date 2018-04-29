@@ -1,0 +1,18 @@
+print("what do you get when you cross a snowman and a vampire?")
+input()
+print("frostbite!")
+print()
+
+print("what do you call an astronaut\'s cavity?")
+input()
+print("a black hole!")
+print()
+
+print("knock, knock")
+input()
+print("who's there?")
+input()
+print("interupting cow.")
+input()
+print("interrupting cow wh", end="")
+print("-Moo!")
