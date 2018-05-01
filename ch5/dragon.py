@@ -37,6 +37,14 @@ def checkCave(chosenCave):
         print("Gobels you up in one bite!")
 
     
-displayIntro()
-chosenCave = chooseCave()
-checkCave(chosenCave)
+playAgain = "yes"
+while playAgain == "yes" or playAgain == "y":
+    displayIntro()
+    chosenCave = chooseCave()
+    checkCave(chosenCave)
+
+    print()
+    print("do you want to play again? (yes or no): ", end="")
+    playAgain = input()
+
+print("Thanks for playing, bye.")
