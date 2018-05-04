@@ -38,7 +38,9 @@ HANGMAN_PICS = ['''
             |
            ===''']
 
-for i in HANGMAN_PICS:
-    print(i)
+words = ("ant baboon bager " 
+"bat bear beaver "
+"camel cat clam cobra")
 
+print(words)
 
