@@ -46,5 +46,20 @@ words = ("ant baboon badger bat bear beaver camel cat clam cobra cougar coyote "
         "sloth snake spider stork swan tiger toad trout turkey turtle weasel "
         "whale wolf wombat zebra").split()
 
+# Retrun random word from passed in wordList.
+def getRandomWord(wordList):
+    wordIndex = random.randint(0, len(wordList) - 1)
+    return wordList[wordIndex]
+
+# draw the hangman, missed letters, correct letters, and word hint.
+def displayBoard(missedLetters, correctLetters, secretWord):
+    print(HANGMAN_PICS[len(missedLetters)])
+    print()
+
+    print("Missed letters:", end=" ")
+    for letter in missedLetters:
+        print(letter, end=" ")
+    print()
+
 print(words)
 
