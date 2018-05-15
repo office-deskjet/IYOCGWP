@@ -69,10 +69,27 @@ def displayBoard(missedLetters, correctLetters, secretWord):
 
     print("Secret word: ", end=" ")
     for letter in blanks:
-        print(letter, end="")
+        print(letter, end=" ")
+
+# Retrun letter the palyer guessed. Validates to a single letter.
+def getGuess(alreadyGuessed):
+    while True:
+        print("Guess a letter: ", end ="")
+        guess = input()
+        guess = guess.lower()
+
+        if len(guess) != 1:
+            print("Please enter a singple letter.")
+        elif guess in alreadyGuessed:
+            print("You have already guessed that letter.")
+        elif guess not in "abcdefghijklmnopqrstuvwxyz":
+            print("Please enter a letter.")
+        else:
+            return guess
 
 
 
 
 displayBoard("nfc", "agr", "badger")
 print()
+getGuess("bt")
