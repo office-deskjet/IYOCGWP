@@ -51,15 +51,28 @@ def getRandomWord(wordList):
     wordIndex = random.randint(0, len(wordList) - 1)
     return wordList[wordIndex]
 
-# draw the hangman, missed letters, correct letters, and word hint.
+# draw the hangman, missed letters, correct letters, and blanks in the word.
 def displayBoard(missedLetters, correctLetters, secretWord):
     print(HANGMAN_PICS[len(missedLetters)])
     print()
 
-    print("Missed letters:", end=" ")
+    print("Missed letters: ", end=" ")
     for letter in missedLetters:
         print(letter, end=" ")
     print()
 
-print(words)
+    #build hint
+    blanks = "_" * len(secretWord)
+    for i in range(len(secretWord)):
+        if secretWord[i] in correctLetters:
+            blanks = blanks[:i] + secretWord[i] + blanks[i + 1:]
 
+    print("Secret word: ", end=" ")
+    for letter in blanks:
+        print(letter, end="")
+
+
+
+
+displayBoard("nfc", "agr", "badger")
+print()
