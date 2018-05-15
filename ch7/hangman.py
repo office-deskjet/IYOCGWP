@@ -88,8 +88,13 @@ def getGuess(alreadyGuessed):
             return guess
 
 
+# run the game again if Y
+def playAgain():
+    print("Do you want to play again (Y/N)? ", end ="")
+    return input().lower().startswith("y")
 
 
 displayBoard("nfc", "agr", "badger")
 print()
 getGuess("bt")
+playAgain()
