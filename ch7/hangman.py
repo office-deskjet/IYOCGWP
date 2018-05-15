@@ -53,10 +53,11 @@ def getRandomWord(wordList):
 
 # draw the hangman, missed letters, correct letters, and blanks in the word.
 def displayBoard(missedLetters, correctLetters, secretWord):
+    # will go out of bounds
     print(HANGMAN_PICS[len(missedLetters)])
     print()
 
-    print("Missed letters: ", end=" ")
+    print("Missed letters:", end=" ")
     for letter in missedLetters:
         print(letter, end=" ")
     print()
@@ -67,9 +68,10 @@ def displayBoard(missedLetters, correctLetters, secretWord):
         if secretWord[i] in correctLetters:
             blanks = blanks[:i] + secretWord[i] + blanks[i + 1:]
 
-    print("Secret word: ", end=" ")
+    print("Secret word:", end=" ")
     for letter in blanks:
         print(letter, end=" ")
+    print()
 
 # Retrun letter the palyer guessed. Validates to a single letter.
 def getGuess(alreadyGuessed):
@@ -94,7 +96,21 @@ def playAgain():
     return input().lower().startswith("y")
 
 
-displayBoard("nfc", "agr", "badger")
-print()
-getGuess("bt")
-playAgain()
+# start of program
+print("H A N G M A N")
+missedLetters = ""
+correctLetters = ""
+alreadyGuessed = ""
+secretWord = getRandomWord(words)
+gameIsDone = False
+
+while True:
+    displayBoard(missedLetters, correctLetters, secretWord)
+
+    guess = getGuess(missedLetters + correctLetters)
+
+    if guess in secretWord:
+        correctLetters = correctLetters + guess
+    else:
+        missedLetters = missedLetters + guess
+
