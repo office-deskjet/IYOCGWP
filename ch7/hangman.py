@@ -1,42 +1,42 @@
 import random
 
 HANGMAN_PICS = ['''
-        +---+
-            |
-            |
-            |
-           ===''','''
-        +---+
-        O   |
-            |
-            |
-           ===''','''
-        +---+
-        O   |
-        |   |
-            |
-           ===''','''
-        +---+
-        O   |
-       /|   |
-            |
-           ===''','''
-        +---+
-        O   |
-       /|\  |
-            |
-           ===''','''
-        +---+
-        O   |
-       /|\  |
-       /    |
-           ===''','''
-        +---+
-        O   |
-       /|\  |
-       / \  |
-            |
-           ===''']
+  +---+
+      |
+      |
+      |
+     ===''','''
+  +---+
+  O   |
+      |
+      |
+     ===''','''
+  +---+
+  O   |
+  |   |
+      |
+     ===''','''
+  +---+
+  O   |
+ /|   |
+      |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+      |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+ /    |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+ / \  |
+      |
+     ===''']
 
 
 words = ("ant baboon badger bat bear beaver camel cat clam cobra cougar coyote "
@@ -66,6 +66,7 @@ def displayBoard(missedLetters, correctLetters, secretWord):
     blanks = "_" * len(secretWord)
     for i in range(len(secretWord)):
         if secretWord[i] in correctLetters:
+            # string builder: take everything before i, insert sercret letter + take everything after i
             blanks = blanks[:i] + secretWord[i] + blanks[i + 1:]
 
     print("Secret word:", end=" ")
@@ -100,10 +101,10 @@ def playAgain():
 print("H A N G M A N")
 missedLetters = ""
 correctLetters = ""
-alreadyGuessed = ""
 secretWord = getRandomWord(words)
 gameIsDone = False
 
+# main game loop
 while True:
     displayBoard(missedLetters, correctLetters, secretWord)
 
@@ -111,6 +112,37 @@ while True:
 
     if guess in secretWord:
         correctLetters = correctLetters + guess
+
+        # Did player win?
+        foundAllletters = True
+        for i in range(len(secretWord)):
+            if secretWord[i] not in correctLetters:
+                foundAllletters = False
+
+        if foundAllletters:
+            print("You guess correct!. The secret word is " + secretWord + "! You win!")
+            gameIsDone = True
+
+
     else:
         missedLetters = missedLetters + guess
+        
+        # Did player lose?
+        if len(missedLetters) == len(HANGMAN_PICS) - 1:
+            displayBoard(missedLetters, correctLetters, secretWord)
+            print("You ran out of guesses!")
+            print("After " + str(len(missedLetters)) + "missed guess and " + 
+                str(len(correctLetters)) + " correct guess, the secret word was '" + secretWord + "'")
+            gameIsDone = True
+
+    # play again?
+    if gameIsDone:
+        if playAgain():
+            missedLetters = ""
+            correctLetters = ""
+            secretWord = getRandomWord(words)
+            gameIsDone = False
+        else:
+            break
+
 
