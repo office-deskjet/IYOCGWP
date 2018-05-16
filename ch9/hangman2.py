@@ -115,6 +115,19 @@ def playAgain():
     print("Do you want to play again (Y/N)? ", end ="")
     return input().lower().startswith("y")
 
+def setDifficulty():
+    difficulty = ""
+    while difficulty not in "EMH":
+        print("Enter difficulty: (E)asy, (M)edium, (H)ard: ", end="")
+        difficulty = input().upper()
+
+    if difficulty == 'M':
+        del HANGMAN_PICS[8]
+        del HANGMAN_PICS[7]
+
+    elif difficulty == 'H':
+        for i in range(4):
+            del HANGMAN_PICS[3]
 
 # start of program
 print("H A N G M A N")
@@ -125,6 +138,7 @@ gameIsDone = False
 
 # main game loop
 while True:
+    setDifficulty()
     displayBoard(missedLetters, correctLetters, secretWord)
 
     guess = getGuess(missedLetters + correctLetters)
