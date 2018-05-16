@@ -61,12 +61,14 @@ words = {
             'goat leech lion lizard monkey moose mouse otter owl panda python rabbit '
             'rat shark sheep skunk squid tiger turkey turtle weasel whale wolf wombat zebra').split()
 }
-print(words.keys())
 
-# Retrun random word from passed in wordList.
-def getRandomWord(wordList):
-    wordIndex = random.randint(0, len(wordList) - 1)
-    return wordList[wordIndex]
+# Retrun a list of a random word from passed in word dictionary and its key.
+def getRandomWord(wordDict):
+    key = random.choice(list(wordDict.keys()))
+    word = random.choice(wordDict[key])
+
+    return [word, key]
+
 
 # draw the hangman, missed letters, correct letters, and blanks in the word.
 def displayBoard(missedLetters, correctLetters, secretWord):
