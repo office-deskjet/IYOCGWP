@@ -55,6 +55,12 @@ def getBoardCopy(board):
         boardCopy.append(i)
     return boardCopy
 
+# Return true if the given move is free on the board
+def isSpaceFree(board, move):
+    return board[move] == ' '
+
+# limit input to 1 thru 9, and check if space free
+def getPlayerMove():
 
 drawBoard(getBoardCopy(' XOXXXOOXO'))
 
