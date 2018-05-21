@@ -48,3 +48,14 @@ def isWinner(brd,ltr):
     (brd[7] == ltr and brd[5] == ltr and brd[3] == ltr) or          # Left right diagonal
     (brd[9] == ltr and brd[5] == ltr and brd[1] == ltr))            # right left diagonal
 
+# return a list reference to a copy of the board game's current state
+def getBoardCopy(board):
+    boardCopy = []
+    for i in board:
+        boardCopy.append(i)
+    return boardCopy
+
+
+drawBoard(getBoardCopy(' XOXXXOOXO'))
+
+
