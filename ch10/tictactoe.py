@@ -113,3 +113,10 @@ def getComputerMove(board, computerLetter):
 
    # AI step 5. Choose a side space
    return  getRandomeMoveFromList(board, [2, 4, 6, 8])
+
+def isBoardFull(board):
+    for i in range(1,10):
+        if isSpaceFree(board, i):
+            return False
+    return True
+
