@@ -51,6 +51,7 @@ HANGMAN_PICS = ['''
      ===''']
 
 
+# {string:List of Strings}
 words = {
 'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
 'Shapes':('square triangle rectangle circle ellipse rhombus trapazoid chevron ' 
@@ -116,7 +117,7 @@ def playAgain():
     return input().lower().startswith("y")
 
 def setDifficulty():
-    difficulty = ""
+    difficulty = " "
     while difficulty not in "EMH":
         print("Enter difficulty: (E)asy, (M)edium, (H)ard: ", end="")
         difficulty = input().upper()
@@ -133,12 +134,13 @@ def setDifficulty():
 print("H A N G M A N")
 missedLetters = ""
 correctLetters = ""
-secretWord = getRandomWord(words)
+secretWord, wordCatagory = getRandomWord(words)
 gameIsDone = False
+setDifficulty()
 
 # main game loop
 while True:
-    setDifficulty()
+    print('The secret word is in the catagory: ' + wordCatagory)
     displayBoard(missedLetters, correctLetters, secretWord)
 
     guess = getGuess(missedLetters + correctLetters)
@@ -173,7 +175,7 @@ while True:
         if playAgain():
             missedLetters = ""
             correctLetters = ""
-            secretWord = getRandomWord(words)
+            secretWord, wordCatagory = getRandomWord(words)
             gameIsDone = False
         else:
             break

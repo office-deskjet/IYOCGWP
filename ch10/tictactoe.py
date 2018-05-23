@@ -42,7 +42,6 @@ def isWinner(brd,ltr):
     (brd[4] == ltr and brd[5] == ltr and brd[6] == ltr) or          # middle row
     (brd[1] == ltr and brd[2] == ltr and brd[3] == ltr) or          # bottom row
     (brd[7] == ltr and brd[4] == ltr and brd[1] == ltr) or          # left column
-    (brd[1] == ltr and brd[2] == ltr and brd[3] == ltr) or          # middle column
     (brd[8] == ltr and brd[5] == ltr and brd[2] == ltr) or          # center column
     (brd[9] == ltr and brd[6] == ltr and brd[3] == ltr) or          # right column
     (brd[7] == ltr and brd[5] == ltr and brd[3] == ltr) or          # Left right diagonal
@@ -57,11 +56,18 @@ def getBoardCopy(board):
 
 # Return true if the given move is free on the board
 def isSpaceFree(board, move):
+    print("hi")
     return board[move] == ' '
 
 # limit input to 1 thru 9, and check if space free
-def getPlayerMove():
+def getPlayerMove(board):
+    move = ' '
+    # Python short-ciruit evaluation. A string will never be passed into isSPaceFree.
+    while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
+        print('What is your next move? (1-9): ', end='')
+        move = input()
+    return int(move)
 
-drawBoard(getBoardCopy(' XOXXXOOXO'))
+getPlayerMove(getBoardCopy(' XOXXXOOXO'))
 
 
