@@ -68,7 +68,7 @@ def getPlayerMove(board):
     return int(move)
 
 # Given a list of moves, randomly pick one that is a possible move, else return None.
-def get RandomeMoveFromList(board, moveList):
+def getRandomeMoveFromList(board, moveList):
     possibleMoves = []
     for i in moveList:
         if isSPaceFree(board, i):
@@ -86,10 +86,30 @@ def getComputerMove(board, computerLetter):
     else:
         playerLetter = 'X'
 
+   # AI step 1. Choose the winning move, if there is one.
    for i in range(1,10):
        boardCopy = getBoardCopy(board)
        if isSPaceFree(boardCopy, i):
-           makeMove(boardCopy, i)
+           makeMove(boardCopy, computerLetter, i)
            if isWinner(boardCopy, computerLetter):
                return i
 
+    # AI step 2. Block Player's winning move.
+   for i in range(1,10):
+       boardCopy = getBoardCopy(board)
+       if isSPaceFree(boardCopy, i):
+           makeMove(boardCopy, playerLetter, i)
+           if isWinner(boardCopy, playerLetter):
+               return i
+
+    # AI step 3. Randomly choose a free corner.
+   corner = getRandomeMoveFromList(board, [1, 3, 7, 9])
+   if corner:
+       return corner
+   
+   # AI step 4. Choose center if it is free
+   if isSpaceFree(board, 5):
+       return 5
+
+   # AI step 5. Choose a side space
+   return  getRandomeMoveFromList(board, [2, 4, 6, 8])
