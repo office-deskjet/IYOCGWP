@@ -56,7 +56,6 @@ def getBoardCopy(board):
 
 # Return true if the given move is free on the board
 def isSpaceFree(board, move):
-    print("hi")
     return board[move] == ' '
 
 # limit input to 1 thru 9, and check if space free
@@ -68,6 +67,29 @@ def getPlayerMove(board):
         move = input()
     return int(move)
 
-getPlayerMove(getBoardCopy(' XOXXXOOXO'))
+# Given a list of moves, randomly pick one that is a possible move, else return None.
+def get RandomeMoveFromList(board, moveList):
+    possibleMoves = []
+    for i in moveList:
+        if isSPaceFree(board, i):
+            possibleMoves.append(i)
 
+    if lent(possibleMoves) != 0:
+        return random.choice(possibleMoves)
+    else:
+        return None
+
+# Game AI, return move number (1 - 9)
+def getComputerMove(board, computerLetter):
+    if computerLetter == 'X':
+        playerLetter = 'O'
+    else:
+        playerLetter = 'X'
+
+   for i in range(1,10):
+       boardCopy = getBoardCopy(board)
+       if isSPaceFree(boardCopy, i):
+           makeMove(boardCopy, i)
+           if isWinner(boardCopy, computerLetter):
+               return i
 
