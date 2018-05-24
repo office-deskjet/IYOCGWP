@@ -27,7 +27,7 @@ def inputPlayerLetter():
 
 def whoGoesFirst():
     if random.randint(0,1) == 0:
-        return 'palyer'
+        return 'player'
     else:
         return 'computer'
 
@@ -61,7 +61,7 @@ def isSpaceFree(board, move):
 # limit input to 1 thru 9, and check if space free
 def getPlayerMove(board):
     move = ' '
-    # Python short-ciruit evaluation. A string will never be passed into isSPaceFree.
+    # Python short-ciruit evaluation. A string will never be passed into isSpaceFree.
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
         print('What is your next move? (1-9): ', end='')
         move = input()
@@ -71,10 +71,10 @@ def getPlayerMove(board):
 def getRandomeMoveFromList(board, moveList):
     possibleMoves = []
     for i in moveList:
-        if isSPaceFree(board, i):
+        if isSpaceFree(board, i):
             possibleMoves.append(i)
 
-    if lent(possibleMoves) != 0:
+    if len(possibleMoves) != 0:
         return random.choice(possibleMoves)
     else:
         return None
@@ -86,33 +86,33 @@ def getComputerMove(board, computerLetter):
     else:
         playerLetter = 'X'
 
-   # AI step 1. Choose the winning move, if there is one.
-   for i in range(1,10):
-       boardCopy = getBoardCopy(board)
-       if isSPaceFree(boardCopy, i):
-           makeMove(boardCopy, computerLetter, i)
-           if isWinner(boardCopy, computerLetter):
-               return i
+    # AI step 1. Choose the winning move, if there is one.
+    for i in range(1,10):
+        boardCopy = getBoardCopy(board)
+        if isSpaceFree(boardCopy, i):
+            makeMove(boardCopy, computerLetter, i)
+            if isWinner(boardCopy, computerLetter):
+                return i
 
     # AI step 2. Block Player's winning move.
-   for i in range(1,10):
-       boardCopy = getBoardCopy(board)
-       if isSPaceFree(boardCopy, i):
-           makeMove(boardCopy, playerLetter, i)
-           if isWinner(boardCopy, playerLetter):
-               return i
+    for i in range(1,10):
+        boardCopy = getBoardCopy(board)
+        if isSpaceFree(boardCopy, i):
+            makeMove(boardCopy, playerLetter, i)
+            if isWinner(boardCopy, playerLetter):
+                return i
 
     # AI step 3. Randomly choose a free corner.
-   corner = getRandomeMoveFromList(board, [1, 3, 7, 9])
-   if corner:
-       return corner
-   
-   # AI step 4. Choose center if it is free
-   if isSpaceFree(board, 5):
-       return 5
+    corner = getRandomeMoveFromList(board, [1, 3, 7, 9])
+    if corner:
+        return corner
 
-   # AI step 5. Choose a side space
-   return  getRandomeMoveFromList(board, [2, 4, 6, 8])
+    # AI step 4. Choose center if it is free
+    if isSpaceFree(board, 5):
+        return 5
+
+    # AI step 5. Choose a side space
+    return  getRandomeMoveFromList(board, [2, 4, 6, 8])
 
 def isBoardFull(board):
     for i in range(1,10):
@@ -157,10 +157,11 @@ while True:
 
         # computer turn
         else:
-            move = getComputerMove(theBoard)
+            move = getComputerMove(theBoard, computerLetter)
             makeMove(theBoard, computerLetter, move)
 
             if isWinner(theBoard, computerLetter):
+                drawBoard(theBoard)
                 print("The computer wins")
                 gameIsPlaying = False
 
@@ -172,8 +173,8 @@ while True:
                 else:
                     turn = 'player'
 
-        print("Do you want to play again? (Y/N): ", end='')
-        if not input().upper().startswith('Y'):
-            break
+    print("Do you want to play again? (Y/N): ", end='')
+    if not input().upper().startswith('Y'):
+        break
 
 
